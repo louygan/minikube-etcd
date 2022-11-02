@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: etcd
-          image: quay.io/coreos/etcd:latest
+          image: docker.io/bitnami/etcd:3.5.5-debian-11-r1
           ports:
             - containerPort: 2379
               name: client
@@ -53,3 +53,8 @@ spec:
                 --initial-cluster ${PEERS} \
                 --initial-cluster-state new \
                 --data-dir /var/run/etcd/default.etcd
+            - name: data
+              mountPath: /var/run/etcd
+      volumes:
+        - name: data
+          emptyDir: {}                
